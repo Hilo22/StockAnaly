@@ -21,7 +21,7 @@ body {
   width: 0;
   height: 6px;
   border-radius: 15px;
-  background-color: #c23564;
+  background-color: #C688EB;
   transition: all 0.2s ease;
 }
 .tab-item {
@@ -31,8 +31,7 @@ body {
   text-align: center;
   color: #c23564;
   background-color: #fff;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
+  border-radius: 5px;
   border-bottom: 5px solid transparent;
   opacity: 0.6;
   cursor: pointer;
@@ -41,7 +40,7 @@ body {
   white-space: nowrap;
 }
 .fa-solid {
-  font-size: 24px;
+  font-size: 20px;
   width: 32px;
   position: relative;
   top: 2px;
@@ -72,9 +71,12 @@ body {
   margin-bottom: 8px;
 }
 .header{
-    background-color: #c0438a;
+    background-color: #FBA2D0;
     padding: 12px 0;
     text-align: center;
     width: 100%;
    
 }   
+canvas{
+  max-height: 400px;
+}
