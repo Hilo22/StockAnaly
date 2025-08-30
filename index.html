@@ -42,14 +42,7 @@
     <div class="tab-pane ">
       <div class="container"> 
         <div class="row"></div>
-        <div class="card mt-3">
-  <div class="card-body">
-    <canvas id="stockChart">
-
-
-    </canvas>
-  </div>
-</div>
+        
         <div class="col-md-6 mx-auto"></div>
         <div class="card">
           <div class="card-body">
@@ -58,6 +51,11 @@
               <input type="text" class="form-control" id="stockSymbol" placeholder="Nhập mã cổ phiếu (VD: AAPL)">
               <button class="btn btn-primary" onclick="fetchStockData()">Tìm kiếm</button>
             </div>
+            <div class="card mt-3">
+  <div class="card-body">
+    <canvas id="stockChart"> </canvas>
+  </div>
+</div>
             <!-- Hiển thị kết quả hoặc lỗi -->
             <div id="stockInfo" class="mt-3"></div>
         </div>

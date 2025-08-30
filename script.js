@@ -6,6 +6,8 @@
 
 
 
+
+
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 const APIKEY = 'A34PJ0XTZR791M72';
@@ -13,7 +15,7 @@ const tabs= $$('.tab-item');
 const panes = $$('.tab-pane');
 const tabActive= $('.tab-item.active');
 const line = $('.line');
-
+let chartInstance = null;
 // Chỉ chạy code line nếu element tồn tại
 if (line) {
     line.style.width=tabActive.offsetWidth + 'px';
@@ -63,36 +65,57 @@ fetch(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${Sym
     });
 
 }
+
+
+
+
+
+
+
 async function chartDraw(data,Symbol){
     const dateLabels=Object.keys(data['Time Series (Daily)']).slice(0,30).reverse();
     const date_close= dateLabels.map(date => parseFloat(data['Time Series (Daily)'][date]['4. close']));
+    const data_volume= dateLabels.map(date => parseFloat(data['Time Series (Daily)'][date]['5. volume']));
 
-   const ctx = document.getElementById('stockChart').getContext('2d');
-   const chart = new Chart(ctx, {
-       type: 'line',
-       data: {
-           labels: dateLabels,
-           datasets: [{
-               label: `Stock Prices for ${Symbol}`,
-               data: date_close,
-               borderColor: 'rgba(75, 192, 192, 1)',
-               borderWidth: 2,
-               fill: false
-           }]
-       },
-       options: {
-           responsive: true,
-           scales: {
-               x: {
-                   type: 'time',
-                   time: {
-                       unit: 'day'
-                   }
-               },
-               y: {
-                   beginAtZero: true
-               }
-           }
-       }
-   });
+    const ctx1 = document.getElementById('stockChart').getContext('2d');
+    chartInstance = new Chart(ctx1, {
+        type: 'line',
+        data: {
+            labels: dateLabels,
+            datasets: [{
+                label: `Stock Prices close for ${Symbol}`,
+                data: date_close,
+                borderColor: '#0d6efd',
+                backgroundColor: 'rgba(13, 110, 253, 0.1)',
+                fill: true,
+                tension: 0.3
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Date'
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Price (USD)'
+                    }
+                }
+            },
+            plugins:{
+                title:{
+                    display: true,
+                    text: `Stock Prices close for ${Symbol}`
+                }
+
+            }
+        }
+    });
+    chartInstance.destroy();
 }
+    
